@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1 style="font-size: 2.4rem;"><strong>Sign up</strong>
+    <span (click)="goToLogin()" style="float: right; color: grey; font-size: 1.5rem;margin-top: 10px;">Login</span>
+  </h1>
+  <div style="text-align: center; margin-top: 50px; margin-bottom: 35px;">
+    <ion-icon src="assets/icon/register.svg" alt="Camera Logo" style="color: grey;width:80px; height:80px "></ion-icon>
+  </div>
+
+  <!-- <ion-list>
+
+    <ion-item lines="none">
+      
+    </ion-item> -->
+
+    <ion-input
+        label="First Name"
+        labelPlacement="floating"
+        [value]="firstName"
+        (ionInput)="onInputFirstName($event)"
+        #ionInputEl
+        style="border-bottom: 1px solid #cec3c394;margin-bottom: 15px;"></ion-input>
+
+    <!-- <ion-item lines="none"> -->
+      <ion-input
+        label="Last Name"
+        labelPlacement="floating"
+        [value]="lastName"
+        (ionInput)="onInputlastName($event)"
+        #ionInputEl2
+        style="border-bottom: 1px solid #cec3c394;margin-bottom: 15px;"></ion-input>
+    <!-- </ion-item> -->
+
+    <!-- <ion-item lines="none"> -->
+      <ion-input
+        type="email"
+        label="Email"
+        labelPlacement="floating"
+        errorText="Invalid email"
+        email
+        style="margin-bottom: 15px;"></ion-input>
+    <!-- </ion-item> -->
+
+    <!-- <ion-item lines="none"> -->
+      <ion-input type="password" label="Password" labelPlacement="floating" [counter]="true" maxlength="10"></ion-input>
+    <!-- </ion-item> -->
+    
+    <!-- <ion-item lines="none"> -->
+      <ion-input type="password" label="Confirm Password" labelPlacement="floating" [counter]="true" maxlength="10"></ion-input>
+    <!-- </ion-item> -->
+
+  <!-- </ion-list> -->
+
+  <ion-button (click)="sendOtp()" fill="outline" expand="block" fill="clear" size="large" shape="round" color="primary" style="font-size: 20px; margin-top: 50px; box-shadow: -11px 15px 27px 14px rgba(0, 0, 0, 0.1); border-radius: 30px;">
+    SIGN UP <ion-icon src="assets/icon/checkmark-outline.svg" slot="start"></ion-icon>
+  </ion-button>
+
+</ion-content>
+
+

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  public title:string = '';
+
+  constructor(private router: Router) {}
+  
+  profilePage() {
+    this.router.navigate(['/profile']);
+  }
 
 }
