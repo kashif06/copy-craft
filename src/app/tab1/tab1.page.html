@@ -1,14 +1,14 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Tab 1
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ion-list lines="none">
-    <ion-list-header style="margin-bottom: 15px;">
+    <ion-list-header class="list-dropdown">
       <ion-select aria-label="fruit" value="apples">
         <ion-select-option value="apples">My Tasks List</ion-select-option>
         <ion-select-option value="oranges">Grocery List</ion-select-option>
@@ -17,10 +17,10 @@
     </ion-list-header>
 
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Make Dua</p>
-        <p class="time">
+        <p class="time today">
           <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:18px; height:18px"></ion-icon>
           <span class="time-text">Today, 6 pm</span>
           <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:18px; height:18px;margin-left: 5px;"></ion-icon>
@@ -28,18 +28,18 @@
       </div>
     </ion-item>
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Enquire about house for aunty</p>
         <p class="time">
           <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:18px; height:18px"></ion-icon>
           <span class="time-text">Tomorrow, 10 am</span>
-          <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:18px; height:18px;margin-left: 5px;"></ion-icon>
+          <!-- <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:18px; height:18px;margin-left: 5px;"></ion-icon> -->
         </p>
       </div>
     </ion-item>
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Give ustadh Quran fees</p>
         <p class="time">
@@ -50,18 +50,18 @@
       </div>
     </ion-item>
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Car washer salary</p>
         <p class="time">
           <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:18px; height:18px"></ion-icon>
-          <span class="time-text">Today, 10 am</span>
-          <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:18px; height:18px;margin-left: 5px;"></ion-icon>
+          <span class="time-text">Tomorrow, 6 pm</span>
+          <!-- <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:18px; height:18px;margin-left: 5px;"></ion-icon> -->
         </p>
       </div>
     </ion-item>
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Book haircut at Zulf Salon</p>
         <p class="time">
@@ -72,7 +72,7 @@
       </div>
     </ion-item>
     <ion-item lines="none">
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-radio slot="start"></ion-radio>
       <div class="item-content">
         <p class="title">Poc expire</p>
         <p class="time">
@@ -83,107 +83,18 @@
       </div>
     </ion-item>
     
-    <!-- <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" justify="start"><h4 style="margin-top: 0;">Give bissi</h4></ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="1">
-            <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-          <ion-col size="auto">
-            Today, 2 pm
-          </ion-col>
-          <ion-col>
-            <ion-icon src="assets/icon/repeat-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item> -->
-    <!-- <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" justify="start">Make dua now</ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="1">
-            <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-          <ion-col size="auto">
-            Today, 2 pm
-          </ion-col>
-          <ion-col>
-            <ion-icon src="assets/icon/repeat-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    </ion-item>
-    <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" justify="start">Get vegetables</ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="1">
-            <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-          <ion-col size="auto">
-            Tomorrow, 10 pm
-          </ion-col>
-          <ion-col>
-            <ion-icon src="assets/icon/repeat-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" justify="start">Book haircut</ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="1">
-            <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-          <ion-col size="auto">
-            Fri, 26 Jul, 10 am
-          </ion-col>
-          <ion-col>
-            <ion-icon src="assets/icon/repeat-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" justify="start">Give ustadh fees</ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="1">
-            <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-          <ion-col size="auto">
-            Thu, 8 Aug, 2 pm
-          </ion-col>
-          <ion-col>
-            <ion-icon src="assets/icon/repeat-outline.svg" alt="Clock Icon"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item> -->
   </ion-list>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button id="open-modal">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.40" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+    <ng-template>
+      <app-create-task></app-create-task>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

@@ -1,0 +1,20 @@
+<ion-content [scrollEvents]="false" class="ion-padding" class="block">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-input placeholder="New Task"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Add details"></ion-input>
+    </ion-item>
+    <ion-item>
+      <div class="icons">
+        <ion-icon src="assets/icon/list-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        <ion-icon src="assets/icon/star-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+      </div>
+      <div class="save" slot="end">
+        <ion-button fill="clear" disabled="true">Save</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
