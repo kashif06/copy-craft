@@ -1,20 +1,48 @@
 <ion-content [scrollEvents]="false" class="ion-padding" class="block">
   <ion-list lines="none">
     <ion-item>
-      <ion-input placeholder="New Task"></ion-input>
+      <ion-input (ionInput)="onInputTitle($event)" #ionInputEl placeholder="New Task"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input placeholder="Add details"></ion-input>
+    <ion-item *ngIf="isDetailsVisible">
+      <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;"></ion-input>
     </ion-item>
     <ion-item>
       <div class="icons">
-        <ion-icon src="assets/icon/list-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
-        <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
-        <ion-icon src="assets/icon/star-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        <ion-icon (click)="toggleDetails()" src="assets/icon/list-outline.svg" alt="Description Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        
+        <ion-icon id="open-custom-dialog" src="assets/icon/time-outline.svg" alt="Clock Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        
+        <ion-icon (click)="toggleStar()" [src]="starIcon" alt="Star Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
+        <ion-icon src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" style="width:27px; height:27px;padding-right: 23px;"></ion-icon>
       </div>
       <div class="save" slot="end">
-        <ion-button fill="clear" disabled="true">Save</ion-button>
+        <ion-button fill="clear" [disabled]="isSaveDisabled" style="font-size: 20px;text-transform: capitalize;">Save</ion-button>
       </div>
     </ion-item>
   </ion-list>
+  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+    <ng-template>
+      <div class="wrapper">
+        <ion-datetime color="calendar" presentation="date">
+        </ion-datetime>
+        <div>
+          <ion-list>
+            <ion-item lines="full">
+              <ion-icon src="assets/icon/time-outline.svg" alt="Repeat Icon" style="width:25px; height:25px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
+              <span>Set time</span>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-icon src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:25px; height:25px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
+              <span>Repeat</span>
+            </ion-item>
+            <ion-item style="float: right;" lines="none">
+              <div color="primary" style="margin-right: 25px;">Cancel</div>
+              <div color="primary">Done</div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>
