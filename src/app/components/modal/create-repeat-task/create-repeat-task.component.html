@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Repeats</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-list lines="none">
+    <ion-list-header class="list-dropdown">
+      <ion-select aria-label="fruit" value="apples">
+        <ion-select-option value="apples">My Tasks List</ion-select-option>
+        <ion-select-option value="oranges">Grocery List</ion-select-option>
+        <ion-select-option value="bananas">Office List</ion-select-option>
+      </ion-select>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input (ionInput)="onInputTitle($event)" #ionInputEl placeholder="New Task"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

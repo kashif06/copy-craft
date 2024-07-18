@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateRepeatTaskComponent } from '../create-repeat-task/create-repeat-task.component';
 import type { IonInput } from '@ionic/angular';
 
 @Component({
@@ -13,10 +14,12 @@ import type { IonInput } from '@ionic/angular';
   standalone: true
 })
 export class CreateTaskComponent  implements OnInit {
+  message = 'This modal example uses the modalController to present and dismiss modals.';
 
   inputModel = '';
   title = '';
   description = '';
+  date: any;
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
   @ViewChild('ionInputEl2', { static: true }) ionInputEl2!: IonInput;
@@ -30,11 +33,19 @@ export class CreateTaskComponent  implements OnInit {
   constructor(private modalCtrl: ModalController, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.date = (new Date()).toISOString();
+
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
       dueDate: [null],
     });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.ionInputEl.setFocus();
+    }, 300);
   }
 
   onInputTitle(ev:any) {
@@ -71,6 +82,19 @@ export class CreateTaskComponent  implements OnInit {
     this.starIconToggle = !this.starIconToggle;
 
     this.starIcon = (this.starIconToggle == true) ? "assets/icon/star-filled.svg": "assets/icon/star-outline.svg";
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: CreateRepeatTaskComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      this.message = `Hello, ${data}!`;
+    }
   }
 
 }

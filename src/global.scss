@@ -49,3 +49,26 @@
 ion-fab-button::part(native) {
     background: var(--ion-color-primary);
 }
+
+.task-icons {
+    width:24px; 
+    height:24px;
+    padding-right: 23px;
+}
+
+.task-save {
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.task-modal-icons {
+    width:23px; 
+    height:23px;
+    margin-left:5px;
+    margin-right: 20px;
+    color: black;
+}
+
+.no-ripple {
+    --ripple-color: transparent;
+  }

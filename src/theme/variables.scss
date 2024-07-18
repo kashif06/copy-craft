@@ -9,12 +9,12 @@
 	--ion-color-primary-shade: #025a7c;
 	--ion-color-primary-tint: #1b7598;
 
-	--ion-color-calendar: #dbeaf2;
-	--ion-color-calendar-rgb: 219,234,242;
-	--ion-color-calendar-contrast: #000000;
-	--ion-color-calendar-contrast-rgb: 0,0,0;
-	--ion-color-calendar-shade: #c1ced5;
-	--ion-color-calendar-tint: #dfecf3;
+	// --ion-color-calendar: #dbeaf2;
+	// --ion-color-calendar-rgb: 219,234,242;
+	// --ion-color-calendar-contrast: #000000;
+	// --ion-color-calendar-contrast-rgb: 0,0,0;
+	// --ion-color-calendar-shade: #c1ced5;
+	// --ion-color-calendar-tint: #dfecf3;
 	
 }
 
@@ -40,6 +40,7 @@ ion-datetime {
 	// --background: #dbeaf2;
 	// --background-rgb: 255, 241, 242;
 	border-radius: 30px;
-	padding: 25px;
+	padding: 25px 0px;
+	padding-bottom: 0px;
 	box-shadow: rgba(var(--ion-color-calendar-rgb), 0.3) 0px 10px 15px -3px;
   }
