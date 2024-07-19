@@ -9,21 +9,78 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ion-list lines="none">
-    <ion-list-header class="list-dropdown">
-      <ion-select aria-label="fruit" value="apples">
-        <ion-select-option value="apples">My Tasks List</ion-select-option>
-        <ion-select-option value="oranges">Grocery List</ion-select-option>
-        <ion-select-option value="bananas">Office List</ion-select-option>
-      </ion-select>
-    </ion-list-header>
 
-    <ion-item>
-      <ion-input (ionInput)="onInputTitle($event)" #ionInputEl placeholder="New Task"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;"></ion-input>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+  <!-- <ion-label>Every</ion-label> -->
+   <ion-list>
+  <ion-item lines="none">
+    <ion-input slot="start" type="number" min="1" value="1" style="width: 15%;border: 1px solid grey;text-align: center;border-radius: 3px;min-height: 50px;"></ion-input>
+    <ion-select interface="popover" value="week" okText="OK" cancelText="Cancel" style="    border-radius: 3px;border: 1px solid grey;padding: 3px;">
+      <ion-select-option value="day">day</ion-select-option>
+      <ion-select-option value="week">week</ion-select-option>
+      <ion-select-option value="month">month</ion-select-option>
+      <ion-select-option value="year">year</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-grid>
+    <ion-row style="flex-wrap: nowrap;">
+      <ion-col size="2" *ngFor="let day of days">
+        <ion-radio-group [allowEmptySelection]="true" value="{{ selectedDay }}">
+          <ion-radio value="{{ day }}">
+            <span class="day-label" [style.color]="selectedDay === day ? 'white' : 'black'">{{ day }}</span>
+          </ion-radio>
+        </ion-radio-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  <!-- <ion-item [button]="true">
+    <div *ngFor="let day of days">
+      <ion-label>{{ day }}</ion-label>
+    </div>
+  </ion-item> -->
+  <!-- <ion-grid>
+    <ion-row style="flex-wrap: nowrap;">
+      <ion-col size="2" *ngFor="let day of days">
+        <ion-radio-group [allowEmptySelection]="true" value="{{ day }}">
+          <ion-radio value="{{ day }}">
+            <span class="day-label">{{ day }}</span>
+          </ion-radio>
+        </ion-radio-group>
+        <ion-label>{{ day }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  
+
+  <ion-item lines="none">
+    <ion-label>Set time</ion-label>
+    <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm"></ion-datetime>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>Starts</ion-label>
+    <ion-datetime picker="date" displayFormat="dd MMMM yyyy" ></ion-datetime>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>Ends</ion-label>
+    <ion-radio-group value="never">
+      <ion-radio-group value="never">Never</ion-radio-group>
+      <ion-radio-group value="on">On</ion-radio-group>
+      <ion-radio-group value="after">After</ion-radio-group>
+    </ion-radio-group>
+  </ion-item>
+
+  <ion-item lines="none" *ngIf="endsMode === 'on'">
+    <ion-datetime picker="date" displayFormat="dd MMMM yyyy"></ion-datetime>
+  </ion-item>
+
+  <ion-item lines="none" *ngIf="endsMode === 'after'">
+    <ion-input type="number" ></ion-input> occurrences
+  </ion-item>
+</ion-list>
 </ion-content>
