@@ -16,7 +16,7 @@
         <ion-icon src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" class="task-icons"></ion-icon>
       </div>
       <div class="save" slot="end">
-        <ion-button fill="clear" [disabled]="isSaveDisabled" class="task-save">Save</ion-button>
+        <ion-button fill="clear" (click)="submitTask()" [disabled]="isSaveDisabled" class="task-save">Save</ion-button>
       </div>
     </ion-item>
   </ion-list>

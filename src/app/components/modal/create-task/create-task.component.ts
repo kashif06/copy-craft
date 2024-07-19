@@ -14,11 +14,12 @@ import type { IonInput } from '@ionic/angular';
   standalone: true
 })
 export class CreateTaskComponent  implements OnInit {
-  message = 'This modal example uses the modalController to present and dismiss modals.';
-
+  
   inputModel = '';
+  
   title = '';
   description = '';
+  isStarMarked = '';
   date: any;
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
@@ -35,11 +36,11 @@ export class CreateTaskComponent  implements OnInit {
   ngOnInit() {
     this.date = (new Date()).toISOString();
 
-    this.taskForm = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      dueDate: [null],
-    });
+    // this.taskForm = this.fb.group({
+    //   title: ['', Validators.required],
+    //   description: [''],
+    //   bookmarked: [null],
+    // });
   }
 
   ngAfterViewInit() {
@@ -51,16 +52,14 @@ export class CreateTaskComponent  implements OnInit {
   onInputTitle(ev:any) {
     const value = ev.target!.value;
     this.isSaveDisabled = value == "";
-    // Removes non alphanumeric characters
     const filteredValue = value.replace(/[^a-zA-Z0-9]+/g, '');
     this.ionInputEl.value = this.title = filteredValue;
   }
   
   onInputDescription(ev:any) {
     const value = ev.target!.value;
-    // Removes non alphanumeric characters
     const filteredValue = value.replace(/[^a-zA-Z0-9]+/g, '');
-    this.ionInputEl2.value = this.description = filteredValue;
+    // this.ionInputEl2.value = this.description = filteredValue;
   }
 
 
@@ -70,7 +69,7 @@ export class CreateTaskComponent  implements OnInit {
 
   submitTask() {
     // Implement logic to handle task submission (e.g., save to database, close modal)
-    console.log('Task Submitted:', this.taskForm.value); // Example log
+    console.log('Task Submitted:', this.title, this.description); // Example log
     this.dismissModal();
   }
 
@@ -93,7 +92,7 @@ export class CreateTaskComponent  implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      this.message = `Hello, ${data}!`;
+      // this.message = `Hello, ${data}!`;
     }
   }
 
