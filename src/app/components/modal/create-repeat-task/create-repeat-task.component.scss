@@ -6,27 +6,50 @@ ion-select::part(container) {
     padding-left: 5px;
 }
 
-ion-radio::part(container) {
-    width: 35px;
-    height: 35px;
-    border-radius: 17px; /* Rounded corners */
-    border: 1px solid grey;
-    position: relative;
-  }
+ion-content::part(scroll) {
+  padding-top: 0;
+}
+
+ion-datetime-button::part(native) {
+  background: transparent;
+}
+
+ion-checkbox {
+  --size: 27px;
+  padding-right: 20px;
+}
+
+.no-padding-right {
+  padding-right: 0;
+  padding-left: 3px;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 14px;
+  border: 1px solid grey;
+}
+
+// ion-radio::part(container) {
+//     width: 35px;
+//     height: 35px;
+//     border-radius: 17px; /* Rounded corners */
+//     border: 1px solid grey;
+//     position: relative;
+//   }
   
-  ion-radio::part(mark) {
-    background: none; /* Hide default checkmark */
-    transition: none;
-    transform: none;
-    border-radius: 0;
-  }
+//   ion-radio::part(mark) {
+//     background: none; /* Hide default checkmark */
+//     transition: none;
+//     transform: none;
+//     border-radius: 0;
+//   }
   
-  ion-radio.radio-checked::part(container) {
-    background: var(--ion-color-primary); /* Use app's primary color */
-    border-color: transparent;
-    position: relative;
-    color: white;
-  }
+//   ion-radio.radio-checked::part(container) {
+//     background: var(--ion-color-primary); /* Use app's primary color */
+//     border-color: transparent;
+//     position: relative;
+//     color: white;
+//   }
   
   .day-label {
     position: absolute;
@@ -35,3 +58,6 @@ ion-radio::part(container) {
     transform: translate(-50%, -50%);
   }
   
+ion-item::part(native) {
+  padding-left: 0;
+}

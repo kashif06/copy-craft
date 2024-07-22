@@ -27,10 +27,18 @@
         </ion-datetime>
         <div>
           <ion-list>
-            <ion-item class="item-border" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
-              <ion-icon class="no-ripple" src="assets/icon/time-outline.svg" alt="Repeat Icon" style="width:23px; height:23px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
-              <span>Set time</span>
+            <ion-item>
+              <ion-datetime-button datetime="time"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="time"></ion-datetime>
+                </ng-template>
+              </ion-modal>
             </ion-item>
+            <!-- <ion-item class="item-border" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
+              <ion-icon id="open-date-input" class="no-ripple" src="assets/icon/time-outline.svg" alt="Repeat Icon" style="width:23px; height:23px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
+              <span>Set time</span>
+            </ion-item> -->
             <ion-item (click)="openModal()" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
               <ion-icon class="no-ripple" src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:23px; height:23px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
               <span>Repeat</span>

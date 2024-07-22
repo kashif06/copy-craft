@@ -35,7 +35,9 @@ export class CreateRepeatTaskComponent  implements OnInit {
   inputModel = '';
   title = '';
   description = '';
-  date: any;
+  // startDate: any = "22 July";
+  // endDate: any = "22 July";
+  time:any = "01:00 pm";
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
   @ViewChild('ionInputEl2', { static: true }) ionInputEl2!: IonInput;
@@ -98,6 +100,14 @@ export class CreateRepeatTaskComponent  implements OnInit {
     } else {
       this.selectedDays.push(day);
     }
+  }
+
+  handleSelectChange(e:any) {
+    console.log('ionChange fired with value: ' + e.detail.value);
+  }
+
+  handleChange(ev:any) {
+    console.log('Current value:', JSON.stringify(ev.target.value));
   }
 
 }
