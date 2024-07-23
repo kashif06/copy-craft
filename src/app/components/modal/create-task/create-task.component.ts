@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CreateRepeatTaskComponent } from '../create-repeat-task/create-repeat-task.component';
 import type { IonInput } from '@ionic/angular';
 
@@ -10,7 +10,7 @@ import type { IonInput } from '@ionic/angular';
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FormsModule],
   standalone: true
 })
 export class CreateTaskComponent  implements OnInit {
@@ -21,6 +21,7 @@ export class CreateTaskComponent  implements OnInit {
   description = '';
   isStarMarked = '';
   date: any;
+  timeSelect:any;
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
   @ViewChild('ionInputEl2', { static: true }) ionInputEl2!: IonInput;

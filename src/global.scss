@@ -79,3 +79,10 @@ ion-col {
     // color: #fff;
     text-align: center;
 }
+
+ion-datetime-button::part(native) {
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
+  }

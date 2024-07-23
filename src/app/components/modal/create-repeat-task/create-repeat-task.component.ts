@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import type { IonInput } from '@ionic/angular';
-
 
 interface RepeatOption {
   value: string;
@@ -14,21 +13,24 @@ interface RepeatOption {
   selector: 'app-create-repeat-task',
   templateUrl: './create-repeat-task.component.html',
   styleUrls: ['./create-repeat-task.component.scss'],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FormsModule],
   standalone: true
 })
 
 export class CreateRepeatTaskComponent  implements OnInit {
 
+  public datetime!:any;
+
   selectedDays: string[] = [];
   repeatOption: RepeatOption = { value: '1', label: '1 week' };
   selectedTime: string = '';
-  startDate: Date = new Date();
+  startDate: any = '2024-07-23';
   endDate: Date | null = null;
   endsMode: string = 'never';
   occurrences: number = 0;
   days: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   selectedDay: string = 'M';
+  selectedPeriod: string = 'week';
 
   name: string = '';
 
@@ -38,6 +40,7 @@ export class CreateRepeatTaskComponent  implements OnInit {
   // startDate: any = "22 July";
   // endDate: any = "22 July";
   time:any = "01:00 pm";
+  timeSelect:any;
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
   @ViewChild('ionInputEl2', { static: true }) ionInputEl2!: IonInput;
@@ -50,7 +53,24 @@ export class CreateRepeatTaskComponent  implements OnInit {
 
   constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const date = new Date();
+    // Set the value of the datetime to 2 days
+    // before the current day
+    // let dayChange = -2;
+    // If the day we are going to set the value to
+    // is in the previous month then set the day 2 days
+    // later instead so it remains in the same month
+    // if (date.getDate() + dayChange <= 0) {
+    //   dayChange = -dayChange;
+    // }
+
+    // Set the value of the datetime to the day
+    // calculated above
+    date.setMonth(date.getMonth() + 3)
+    // date.setDate(date.getDate() + dayChange);
+    this.datetime = date.toISOString();
+  }
 
   // cancel() {
   //   return this.modalCtrl.dismiss(null, 'cancel');
@@ -102,8 +122,13 @@ export class CreateRepeatTaskComponent  implements OnInit {
     }
   }
 
+  back() {
+    this.modalCtrl.dismiss();
+  }
+
   handleSelectChange(e:any) {
     console.log('ionChange fired with value: ' + e.detail.value);
+    this.selectedPeriod = e.detail.value;
   }
 
   handleChange(ev:any) {

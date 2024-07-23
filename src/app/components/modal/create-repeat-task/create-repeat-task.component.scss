@@ -7,16 +7,15 @@ ion-select::part(container) {
 }
 
 ion-content::part(scroll) {
-  padding-top: 0;
+  padding: 0 22px;
 }
 
-ion-datetime-button::part(native) {
-  background: transparent;
-}
 
 ion-checkbox {
   --size: 27px;
-  padding-right: 20px;
+  // padding-right: 20px;
+  // --checkbox-background-checked	: red
+  --checkmark-color	: var(--ion-color-primary);
 }
 
 .no-padding-right {
@@ -27,6 +26,10 @@ ion-checkbox {
 ion-checkbox::part(container) {
   border-radius: 14px;
   border: 1px solid grey;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
 }
 
 // ion-radio::part(container) {
