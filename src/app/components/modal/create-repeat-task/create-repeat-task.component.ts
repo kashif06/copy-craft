@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalDataService } from 'src/app/services/modal-data.service';
 import type { IonInput } from '@ionic/angular';
 
 interface RepeatOption {
@@ -19,28 +20,22 @@ interface RepeatOption {
 
 export class CreateRepeatTaskComponent  implements OnInit {
 
-  public datetime!:any;
-
-  selectedDays: string[] = [];
-  repeatOption: RepeatOption = { value: '1', label: '1 week' };
-  selectedTime: string = '';
-  startDate: any = '2024-07-23';
-  endDate: Date | null = null;
-  endsMode: string = 'never';
-  occurrences: number = 0;
   days: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  selectedDay: string = 'M';
-  selectedPeriod: string = 'week';
+  dayMonthPeriodOptions: number[] = []
 
-  name: string = '';
+  repeatFrequency: number = 1;
+  selectedPeriod: string = 'week';
+  selectedPeriodMonthDay: number = 1;
+  selectedWeekDays: boolean[] = Array(7).fill(false);
+  selectedTime: string | null = null;
+  startDateSelect: string | null = null;  
+  endsMode: string = 'never';
+  endDateSelect: string | null = null;
+  occurrences: number = 13;
 
   inputModel = '';
   title = '';
   description = '';
-  // startDate: any = "22 July";
-  // endDate: any = "22 July";
-  time:any = "01:00 pm";
-  timeSelect:any;
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
   @ViewChild('ionInputEl2', { static: true }) ionInputEl2!: IonInput;
@@ -51,34 +46,25 @@ export class CreateRepeatTaskComponent  implements OnInit {
   starIcon: string = "assets/icon/star-outline.svg";
   starIconToggle: boolean = false;
 
-  constructor(private modalCtrl: ModalController) { }
-
-  ngOnInit() {
-    const date = new Date();
-    // Set the value of the datetime to 2 days
-    // before the current day
-    // let dayChange = -2;
-    // If the day we are going to set the value to
-    // is in the previous month then set the day 2 days
-    // later instead so it remains in the same month
-    // if (date.getDate() + dayChange <= 0) {
-    //   dayChange = -dayChange;
-    // }
-
-    // Set the value of the datetime to the day
-    // calculated above
-    date.setMonth(date.getMonth() + 3)
-    // date.setDate(date.getDate() + dayChange);
-    this.datetime = date.toISOString();
+  constructor(private modalCtrl: ModalController, private modalDataService: ModalDataService) { 
+    this.dayMonthPeriodOptions = Array.from({ length: 30 }, (_, i) => i + 1);
   }
 
-  // cancel() {
-  //   return this.modalCtrl.dismiss(null, 'cancel');
-  // }
+  ngOnInit() {
+    const now = new Date();
+    this.selectedPeriodMonthDay = now.getDate();
+    this.selectedWeekDays[now.getDay()] = true;
 
-  // confirm() {
-  //   return this.modalCtrl.dismiss(this.name, 'confirm');
-  // }
+    this.startDateSelect = now.toISOString();
+    this.selectedTime = now.toISOString();
+    // Add 3 months to the End date...
+    now.setMonth(now.getMonth() + 3)
+    this.endDateSelect = now.toISOString();
+  }
+
+  dateChanged(v:any) {
+    console.log("date chage: ", v)
+  }
 
   onInputTitle(ev:any) {
     const value = ev.target!.value;
@@ -96,16 +82,17 @@ export class CreateRepeatTaskComponent  implements OnInit {
   }
 
   confirm() {
-    // Handle confirmed data here
-    console.log('Selected data:', {
-      repeatOption: this.repeatOption,
-      selectedDays: this.selectedDays,
+    let data = {
+      selectedPeriod: this.selectedPeriod,
+      selectedWeekDays: this.selectedWeekDays,
       selectedTime: this.selectedTime,
-      startDate: this.startDate,
-      endDate: this.endDate,
+      startDateSelect: this.startDateSelect,
+      repeatFrequency: this.repeatFrequency,
+      endDateSelect: this.endDateSelect,
       endsMode: this.endsMode,
       occurrences: this.occurrences
-    });
+    };
+    this.modalDataService.sendModalResponse(data)
     this.modalCtrl.dismiss();
   }
 
@@ -113,13 +100,13 @@ export class CreateRepeatTaskComponent  implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  toggleDay(day: string) {
-    const index = this.selectedDays.indexOf(day);
-    if (index > -1) {
-      this.selectedDays.splice(index, 1);
-    } else {
-      this.selectedDays.push(day);
-    }
+  toggleDay(day: number) {
+    // const index = this.selectedWeekDays.indexOf(day);
+    // if (index > -1) {
+    //   this.selectedWeekDays.splice(index, 1);
+    // } else {
+    //   this.selectedWeekDays.push(day);
+    // }
   }
 
   back() {
@@ -131,7 +118,7 @@ export class CreateRepeatTaskComponent  implements OnInit {
     this.selectedPeriod = e.detail.value;
   }
 
-  handleChange(ev:any) {
+  handleEndEventChange(ev:any) {
     console.log('Current value:', JSON.stringify(ev.target.value));
   }
 

@@ -16,18 +16,25 @@
       <ion-label>Every</ion-label>
     </ion-item>
     <ion-item lines="none">
-      <ion-input slot="start" type="number" min="1" value="1" style="width: 15%;border: 1.2px solid grey;text-align: center;border-radius: 6px;min-height: 55px;"></ion-input>
-      <ion-select labelPlacement="stacked" (ionChange)="handleSelectChange($event)" interface="popover" value="week" okText="OK" cancelText="Cancel" style="border-radius: 6px;border: 1.2px solid grey; padding-right: 6px;">
+      <ion-input [(ngModel)]="repeatFrequency" slot="start" type="number" min="1" style="width: 15%;border: 1.2px solid grey;text-align: center;border-radius: 6px;min-height: 55px;"></ion-input>
+      <ion-select labelPlacement="stacked" [(ngModel)]="selectedPeriod" interface="popover" value="week" okText="OK" cancelText="Cancel" style="border-radius: 6px;border: 1.2px solid grey; padding-right: 6px;">
         <ion-select-option value="day">day</ion-select-option>
         <ion-select-option value="week">week</ion-select-option>
         <ion-select-option value="month">month</ion-select-option>
         <ion-select-option value="year">year</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <ion-item lines="none" *ngIf="selectedPeriod == 'month'" [ngClass]="{'margin-top-20' : selectedPeriod == 'month'}">
+      <ion-select labelPlacement="stacked" [(ngModel)]="selectedPeriodMonthDay" interface="popover" value="week" okText="OK" cancelText="Cancel" style="border-radius: 6px;border: 1.2px solid grey; padding-right: 6px;">
+        <ion-select-option *ngFor="let day of dayMonthPeriodOptions" [value]="day">Day {{ day }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
     <ion-grid *ngIf="selectedPeriod == 'week'">
       <ion-row>
         <ion-col *ngFor="let day of days; let i = index">
-          <ion-checkbox [ngClass]="{'no-padding-right': i === days.length - 1}" labelPlacement="stacked">{{day}}</ion-checkbox>
+          <ion-checkbox [(ngModel)]="selectedWeekDays[i]" [ngClass]="{'no-padding-right': i === days.length - 1}" labelPlacement="stacked">{{day}}</ion-checkbox>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -35,7 +42,7 @@
     <ion-datetime-button datetime="dtb1" [ngClass]="{'margin-top-20' : selectedPeriod != 'week'}" style="border-radius: 6px;border: 1.2px solid grey;padding: 10px;justify-content: left;"></ion-datetime-button>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime [showDefaultButtons]="true" doneText="OK" [(ngModel)]="timeSelect" id="dtb1" presentation="time">
+        <ion-datetime [showDefaultButtons]="true" doneText="OK" (ionChange)="dateChanged($event)" id="dtb1" presentation="time">
           <span slot="title">Select time</span>
         </ion-datetime>
       </ng-template>
@@ -51,7 +58,7 @@
       <ng-template>
         <ion-datetime [formatOptions]="{
           date: { day: '2-digit', month: 'long' },
-        }" [(ngModel)]="startDate" [showDefaultButtons]="true" doneText="OK" [showDefaultTitle]="true" presentation="date" id="startDateTimeId">
+        }" [(ngModel)]="startDateSelect" [showDefaultButtons]="true" doneText="OK" [showDefaultTitle]="true" presentation="date" id="startDateTimeId">
           <span slot="title">Start date</span>
         </ion-datetime>
       </ng-template>
@@ -62,8 +69,8 @@
       <ion-label>Ends</ion-label>
     </ion-item>
     <ion-item lines="none">
-      <ion-radio-group value="end" (ionChange)="handleChange($event)">
-        <ion-radio value="end" justify="start" alignment="center" mode="md" labelPlacement="end">Never</ion-radio>
+      <ion-radio-group [(ngModel)]="endsMode">
+        <ion-radio value="never" justify="start" alignment="center" mode="md" labelPlacement="end">Never</ion-radio>
         <ion-radio value="on" justify="start" alignment="center" mode="md" labelPlacement="end">
           <div style="display: flex;align-items: center;">
             <ion-label>On</ion-label>
@@ -73,7 +80,7 @@
               <ng-template>
                 <ion-datetime [formatOptions]="{
                   date: { day: '2-digit', month: 'long' },
-                }" [(ngModel)]="datetime" [showDefaultButtons]="true" doneText="OK" [showDefaultTitle]="true" presentation="date" id="endDateTime">
+                }" [(ngModel)]="endDateSelect" [showDefaultButtons]="true" doneText="OK" [showDefaultTitle]="true" presentation="date" id="endDateTime">
                   <span slot="title">End date</span>
                 </ion-datetime>
               </ng-template>
@@ -87,7 +94,7 @@
             <ion-label>After</ion-label>
             
             <ion-item lines="none">
-              <ion-input slot="start" type="number" min="13" value="13" style="width: 20%;border: 1.2px solid grey;text-align: center;border-radius: 6px;min-height: 50px;margin-left: 15px;margin-right: 10px;"></ion-input>
+              <ion-input slot="start" type="number" min="13" [(ngModel)]="occurrences" style="width: 20%;border: 1.2px solid grey;text-align: center;border-radius: 6px;min-height: 50px;margin-left: 15px;margin-right: 10px;"></ion-input>
               <ion-label>occurences</ion-label>
             </ion-item>
 

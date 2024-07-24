@@ -1,10 +1,17 @@
 <ion-content [scrollEvents]="false" class="ion-padding" class="block">
-  <ion-list lines="none">
-    <ion-item>
+  <ion-list lines="none" style="padding-left: 10px;">
+    <ion-item style="height: 40px;">
       <ion-input (ionInput)="onInputTitle($event)" #ionInputEl placeholder="New Task"></ion-input>
     </ion-item>
     <ion-item *ngIf="isDetailsVisible">
-      <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;"></ion-input>
+      <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;color: dimgray; font-size: 15px;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-chip style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray;">
+        <ion-icon name="repeat-outline"></ion-icon>
+        <ion-label>Weekly on Webnesday</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
     </ion-item>
     <ion-item>
       <div class="icons">

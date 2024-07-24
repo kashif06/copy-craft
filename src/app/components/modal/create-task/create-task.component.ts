@@ -4,7 +4,10 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CreateRepeatTaskComponent } from '../create-repeat-task/create-repeat-task.component';
+import { ModalDataService } from 'src/app/services/modal-data.service';
 import type { IonInput } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { close, closeCircle, pin } from 'ionicons/icons';
 
 @Component({
   selector: 'app-create-task',
@@ -32,7 +35,14 @@ export class CreateTaskComponent  implements OnInit {
   starIcon: string = "assets/icon/star-outline.svg";
   starIconToggle: boolean = false;
 
-  constructor(private modalCtrl: ModalController, private fb: FormBuilder) { }
+  constructor(private modalCtrl: ModalController, private fb: FormBuilder, private modalDataService: ModalDataService) { 
+
+    addIcons({ close });
+    this.modalDataService.getModalResponse().subscribe((res:any) => {
+      console.log("RESPONSE GOT ", res);
+    })
+
+  }
 
   ngOnInit() {
     this.date = (new Date()).toISOString();
