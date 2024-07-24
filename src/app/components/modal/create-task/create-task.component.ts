@@ -46,12 +46,6 @@ export class CreateTaskComponent  implements OnInit {
 
   ngOnInit() {
     this.date = (new Date()).toISOString();
-
-    // this.taskForm = this.fb.group({
-    //   title: ['', Validators.required],
-    //   description: [''],
-    //   bookmarked: [null],
-    // });
   }
 
   ngAfterViewInit() {

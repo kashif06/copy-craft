@@ -15,12 +15,27 @@
     </ion-item>
     <ion-item>
       <div class="icons">
-        <ion-icon (click)="toggleDetails()" src="assets/icon/list-outline.svg" alt="Description Icon" class="task-icons"></ion-icon>
+
+        <ion-button size="small" (click)="toggleDetails()" fill="clear" shape="round">
+          <ion-icon src="assets/icon/list-outline.svg" alt="Description Icon" class="task-icons"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" id="open-custom-dialog" fill="clear" shape="round">
+          <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" class="task-icons"></ion-icon>
+        </ion-button>
+
         
-        <ion-icon id="open-custom-dialog" src="assets/icon/time-outline.svg" alt="Clock Icon" class="task-icons"></ion-icon>
+        <ion-button size="small" (click)="toggleStar()" fill="clear" shape="round">
+          <ion-icon [src]="starIcon" alt="Star Icon" class="task-icons"></ion-icon>
+        </ion-button>
+
+        <ion-button size="small" fill="clear" shape="round">
+          <ion-icon src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" class="task-icons"></ion-icon>
+        </ion-button>
         
-        <ion-icon (click)="toggleStar()" [src]="starIcon" alt="Star Icon" class="task-icons"></ion-icon>
-        <ion-icon src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" class="task-icons"></ion-icon>
+        
+        
+        
       </div>
       <div class="save" slot="end">
         <ion-button fill="clear" (click)="submitTask()" [disabled]="isSaveDisabled" class="task-save">Save</ion-button>
