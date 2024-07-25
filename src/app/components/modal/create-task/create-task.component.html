@@ -7,40 +7,29 @@
       <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;color: dimgray; font-size: 15px;"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-chip style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray;">
-        <ion-icon name="repeat-outline"></ion-icon>
-        <ion-label>Weekly on Webnesday</ion-label>
-        <ion-icon name="close"></ion-icon>
+      <ion-chip style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray;margin-left: 0;">
+        <!-- <ion-icon name="repeat-outline"></ion-icon> -->
+        <ion-label>{{ date | date: 'EEE, d MMM' }}, {{time}}</ion-label>
       </ion-chip>
     </ion-item>
-    <ion-item>
-      <div class="icons">
-
-        <ion-button size="small" (click)="toggleDetails()" fill="clear" shape="round">
-          <ion-icon src="assets/icon/list-outline.svg" alt="Description Icon" class="task-icons"></ion-icon>
-        </ion-button>
-
-        <ion-button size="small" id="open-custom-dialog" fill="clear" shape="round">
-          <ion-icon src="assets/icon/time-outline.svg" alt="Clock Icon" class="task-icons"></ion-icon>
-        </ion-button>
-
-        
-        <ion-button size="small" (click)="toggleStar()" fill="clear" shape="round">
-          <ion-icon [src]="starIcon" alt="Star Icon" class="task-icons"></ion-icon>
-        </ion-button>
-
-        <ion-button size="small" fill="clear" shape="round">
-          <ion-icon src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" class="task-icons"></ion-icon>
-        </ion-button>
-        
-        
-        
-        
-      </div>
-      <div class="save" slot="end">
-        <ion-button fill="clear" (click)="submitTask()" [disabled]="isSaveDisabled" class="task-save">Save</ion-button>
-      </div>
-    </ion-item>
+    <div class="icons" style="display: flex;">
+      <ion-item button (click)="toggleDetails()">
+        <ion-icon slot="start" src="assets/icon/list-outline.svg" alt="Description Icon" class="task-icons"></ion-icon>
+      </ion-item>
+      <ion-item button id="open-custom-dialog">
+        <ion-icon slot="start" src="assets/icon/time-outline.svg" alt="Clock Icon" class="task-icons"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="toggleStar()">
+        <ion-icon slot="start" [src]="starIcon" alt="Star Icon" class="task-icons"></ion-icon>
+      </ion-item>
+      <ion-item button>
+        <ion-icon slot="start" src="assets/icon/person-add-outline.svg" alt="Friend Add Icon" class="task-icons"></ion-icon>
+      </ion-item>
+      <ion-item class="save" slot="end" style="flex:auto">
+        <ion-button slot="end" fill="clear" (click)="submitTask()" [disabled]="isSaveDisabled" class="task-save">Save</ion-button>
+      </ion-item>
+    </div>
+    
   </ion-list>
   <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
     <ng-template>
@@ -62,7 +51,7 @@
               </ion-modal>
               <!-- Modal for TIME PCIKER end -->
             </ion-item>
-            <ion-item (click)="openModal()" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
+            <ion-item (click)="openRepeatModal()" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
               <ion-icon class="no-ripple" src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:27px; height:27px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
               <span>Repeat</span>
             </ion-item>
