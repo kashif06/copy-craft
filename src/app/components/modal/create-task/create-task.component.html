@@ -7,9 +7,9 @@
       <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;color: dimgray; font-size: 15px;"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-chip style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray;margin-left: 0;">
+      <ion-chip id="open-custom-dialog" style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray; margin-left: 0;">
         <!-- <ion-icon name="repeat-outline"></ion-icon> -->
-        <ion-label>{{ date | date: 'EEE, d MMM' }}, {{time}}</ion-label>
+        <ion-label>{{ dateTime | date: 'EEE, d MMM, h:mm a' }}</ion-label>
       </ion-chip>
     </ion-item>
     <div class="icons" style="display: flex;">
@@ -34,7 +34,7 @@
   <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
     <ng-template>
       <div class="wrapper">
-        <ion-datetime [value]="date" displayFormat="YYYY-mm-dd" presentation="date">
+        <ion-datetime [(ngModel)]="dateTimeISO" displayFormat="YYYY-mm-dd" presentation="date">
         </ion-datetime>
         <div>
           <ion-list>
@@ -44,7 +44,7 @@
               <ion-datetime-button datetime="dtb1" style="width: 100%;"></ion-datetime-button>
               <ion-modal [keepContentsMounted]="true">
                 <ng-template>
-                  <ion-datetime [showDefaultButtons]="true" doneText="OK" [(ngModel)]="timeSelect" id="dtb1" presentation="time">
+                  <ion-datetime (ionChange)="onTimeChange($event.detail.value)" [showDefaultButtons]="true" doneText="OK" [(ngModel)]="dateTimeISO" id="dtb1" presentation="time">
                     <span slot="title">Select time</span>
                   </ion-datetime>
                 </ng-template>

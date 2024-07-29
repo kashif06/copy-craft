@@ -23,8 +23,8 @@ export class CreateTaskComponent  implements OnInit {
   title = '';
   description = '';
   isStarMarked = '';
-  date: Date = new Date();
-  time: string = this.formatTime(new Date());
+  public dateTime;
+  public dateTimeISO;
 
   timeSelect:any;
 
@@ -43,10 +43,26 @@ export class CreateTaskComponent  implements OnInit {
       console.log("RESPONSE GOT ", res);
     })
 
+    const date = new Date();
+    this.dateTime = this.roundToNextHour(date);
+    this.dateTimeISO = this.toLocalISOString(this.dateTime);
+
   }
 
-  ngOnInit() {
+  roundToNextHour(date: Date): Date {
+    date.setMinutes(0, 0, 0); // Set minutes, seconds, milliseconds to 0
+    date.setHours(date.getHours() + 1); // Increment hour by 1
+    return date;
+  }
 
+  toLocalISOString(date: Date): string {
+    const tzoffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
+    const localISOTime = (new Date(date.getTime() - tzoffset)).toISOString().slice(0, -1);
+    return localISOTime + 'Z'; // Append 'Z' to indicate UTC
+  }
+
+  ngOnInit(): void {
+    
   }
 
   ngAfterViewInit() {
@@ -75,7 +91,7 @@ export class CreateTaskComponent  implements OnInit {
 
   submitTask() {
     // Implement logic to handle task submission (e.g., save to database, close modal)
-    console.log('Task Submitted:', this.title, this.description); // Example log
+    console.log('Task Submitted:', this.title, this.description, this.dateTime); // Example log
     this.dismissModal();
   }
 
@@ -106,12 +122,22 @@ export class CreateTaskComponent  implements OnInit {
     }
   }
 
-  formatTime(date: Date): string {
+  formatTime(date: Date, isIsoFormat: boolean): string {
     const minutes = date.getMinutes();
-    const roundedMinutes = Math.round(minutes / 30) * 30;
-    const hours = date.getHours();
-    const formattedTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, roundedMinutes).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' });
-    return formattedTime;
+    const roundedMinutes = 60; // Set minutes to 0 for the next hour
+    date.setMinutes(0,0);
+    date.setHours(date.getHours());
+
+    if(isIsoFormat) {
+      return date.toISOString();
+    }
+    return date.toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' });
+  }
+
+  onTimeChange(newTime: any) {
+    console.log(newTime);
+    this.dateTimeISO = newTime;
+    this.dateTime = new Date(newTime);
   }
 
 }

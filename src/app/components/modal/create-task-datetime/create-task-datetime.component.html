@@ -1,0 +1,34 @@
+<ion-modal>
+<div class="wrapper">
+  <ion-datetime [value]="date" displayFormat="YYYY-mm-dd" presentation="date">
+  </ion-datetime>
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-icon id="open-date-input" class="no-ripple" src="assets/icon/time-outline.svg" alt="Repeat Icon" style="width:27px; height:27px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
+         <!-- Modal for TIME PCIKER start -->
+        <ion-datetime-button datetime="dtb1" style="width: 100%;"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime [showDefaultButtons]="true" doneText="OK" [(ngModel)]="timeSelect" id="dtb1" presentation="time">
+              <span slot="title">Select time</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <!-- Modal for TIME PCIKER end -->
+      </ion-item>
+      <ion-item (click)="openRepeatModal()" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
+        <ion-icon class="no-ripple" src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:27px; height:27px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
+        <span>Repeat</span>
+      </ion-item>
+      <ion-item style="float: right; margin-top: 5px; margin-right: 8px;" lines="none">
+
+        <ion-button fill="clear" (click)="dismissModal()" style="font-size: 15px;text-transform: capitalize;margin-right: 22px">Cancel</ion-button>
+
+        <ion-button fill="clear" (click)="submitTask()" style="font-size: 15px;text-transform: capitalize;">Done</ion-button>
+
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+</ion-modal>
