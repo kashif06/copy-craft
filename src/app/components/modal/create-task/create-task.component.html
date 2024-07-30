@@ -7,7 +7,7 @@
       <ion-input (ionInput)="onInputDescription($event)" #ionInputEl2 placeholder="Add details" style="font-size: 15px;color: dimgray; font-size: 15px;"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-chip id="open-custom-dialog" style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray; margin-left: 0;">
+      <ion-chip (click)="openDateTimeModal()" style="border-radius: 9px; background: #ecf4f8; border: 1.2px solid gray; margin-left: 0;">
         <!-- <ion-icon name="repeat-outline"></ion-icon> -->
         <ion-label>{{ dateTime | date: 'EEE, d MMM, h:mm a' }}</ion-label>
       </ion-chip>
@@ -16,7 +16,7 @@
       <ion-item button (click)="toggleDetails()">
         <ion-icon slot="start" src="assets/icon/list-outline.svg" alt="Description Icon" class="task-icons"></ion-icon>
       </ion-item>
-      <ion-item button id="open-custom-dialog">
+      <ion-item button (click)="openDateTimeModal()">
         <ion-icon slot="start" src="assets/icon/time-outline.svg" alt="Clock Icon" class="task-icons"></ion-icon>
       </ion-item>
       <ion-item button (click)="toggleStar()">
@@ -31,41 +31,5 @@
     </div>
     
   </ion-list>
-  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
-    <ng-template>
-      <div class="wrapper">
-        <ion-datetime [(ngModel)]="dateTimeISO" displayFormat="YYYY-mm-dd" presentation="date">
-        </ion-datetime>
-        <div>
-          <ion-list>
-            <ion-item>
-              <ion-icon id="open-date-input" class="no-ripple" src="assets/icon/time-outline.svg" alt="Repeat Icon" style="width:27px; height:27px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
-               <!-- Modal for TIME PCIKER start -->
-              <ion-datetime-button datetime="dtb1" style="width: 100%;"></ion-datetime-button>
-              <ion-modal [keepContentsMounted]="true">
-                <ng-template>
-                  <ion-datetime (ionChange)="onTimeChange($event.detail.value)" [showDefaultButtons]="true" doneText="OK" [(ngModel)]="dateTimeISO" id="dtb1" presentation="time">
-                    <span slot="title">Select time</span>
-                  </ion-datetime>
-                </ng-template>
-              </ion-modal>
-              <!-- Modal for TIME PCIKER end -->
-            </ion-item>
-            <ion-item (click)="openRepeatModal()" lines="full" [button]="true" style="padding-top: 7px;padding-bottom: 7px;">
-              <ion-icon class="no-ripple" src="assets/icon/repeat-outline.svg" alt="Repeat Icon" style="width:27px; height:27px;margin-left:5px;margin-right: 20px;color: black;"></ion-icon>
-              <span>Repeat</span>
-            </ion-item>
-            <ion-item style="float: right; margin-top: 5px; margin-right: 8px;" lines="none">
-
-              <ion-button fill="clear" (click)="dismissModal()" style="font-size: 15px;text-transform: capitalize;margin-right: 22px">Cancel</ion-button>
-
-              <ion-button fill="clear" (click)="submitTask()" style="font-size: 15px;text-transform: capitalize;">Done</ion-button>
-
-            </ion-item>
-          </ion-list>
-        </div>
-      </div>
-    </ng-template>
-  </ion-modal>
   
 </ion-content>

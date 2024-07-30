@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { CreateTaskDatetimeComponent } from '../create-task-datetime/create-task-datetime.component';
 import { CreateRepeatTaskComponent } from '../create-repeat-task/create-repeat-task.component';
 import { ModalDataService } from 'src/app/services/modal-data.service';
 import type { IonInput} from '@ionic/angular';
@@ -14,7 +15,7 @@ import { close, closeCircle, pin } from 'ionicons/icons';
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
-  imports: [CommonModule, IonicModule, FormsModule],
+  imports: [CommonModule, IonicModule, FormsModule, CreateTaskDatetimeComponent],
   standalone: true
 })
 export class CreateTaskComponent  implements OnInit {
@@ -121,6 +122,24 @@ export class CreateTaskComponent  implements OnInit {
       // this.message = `Hello, ${data}!`;
     }
   }
+  
+  async openDateTimeModal() {
+    const modal = await this.modalCtrl.create({
+      component: CreateTaskDatetimeComponent,
+      componentProps: {
+        dateTime: this.dateTime,
+        dateTimeISO: this.dateTimeISO
+      },
+      id: 'date-time-ion-modal'
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      // this.message = `Hello, ${data}!`;
+    }
+  }
 
   formatTime(date: Date, isIsoFormat: boolean): string {
     const minutes = date.getMinutes();
@@ -134,7 +153,7 @@ export class CreateTaskComponent  implements OnInit {
     return date.toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' });
   }
 
-  onTimeChange(newTime: any) {
+  onDateTimeChange(newTime: any) {
     console.log(newTime);
     this.dateTimeISO = newTime;
     this.dateTime = new Date(newTime);

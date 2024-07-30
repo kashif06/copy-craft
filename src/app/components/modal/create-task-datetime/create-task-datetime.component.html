@@ -1,6 +1,5 @@
-<ion-modal>
 <div class="wrapper">
-  <ion-datetime [value]="date" displayFormat="YYYY-mm-dd" presentation="date">
+  <ion-datetime  (ionChange)="onDateTimeChange($event.detail.value)"  [(ngModel)]="dateTimeISO" displayFormat="YYYY-mm-dd" presentation="date">
   </ion-datetime>
   <div>
     <ion-list>
@@ -10,7 +9,7 @@
         <ion-datetime-button datetime="dtb1" style="width: 100%;"></ion-datetime-button>
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
-            <ion-datetime [showDefaultButtons]="true" doneText="OK" [(ngModel)]="timeSelect" id="dtb1" presentation="time">
+            <ion-datetime (ionChange)="onDateTimeChange($event.detail.value)" [showDefaultButtons]="true" doneText="OK" [(ngModel)]="dateTimeISO" id="dtb1" presentation="time">
               <span slot="title">Select time</span>
             </ion-datetime>
           </ng-template>
@@ -31,4 +30,3 @@
     </ion-list>
   </div>
 </div>
-</ion-modal>
