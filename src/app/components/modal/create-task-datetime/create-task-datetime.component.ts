@@ -3,6 +3,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { CreateRepeatTaskComponent } from '../create-repeat-task/create-repeat-task.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModalDataService } from 'src/app/services/modal-data.service';
 
 @Component({
   selector: 'app-create-task-datetime',
@@ -20,7 +21,7 @@ export class CreateTaskDatetimeComponent  implements OnInit {
   public dateTimeISO;
   timeSelect:any;
 
-  constructor(private modalCtrl: ModalController) { 
+  constructor(private modalCtrl: ModalController, private modalDataService: ModalDataService) { 
     const date = new Date();
     this.dateTime = this.roundToNextHour(date);
     this.dateTimeISO = this.toLocalISOString(this.dateTime);
@@ -66,6 +67,11 @@ export class CreateTaskDatetimeComponent  implements OnInit {
     console.log(newTime);
     this.dateTimeISO = newTime;
     this.dateTime = new Date(newTime);
+    let data = {
+      'dateTimeISO': this.dateTimeISO,
+      'dateTime': this.dateTime,
+    }
+    this.modalDataService.sendModalResponse({'dateTimeChange': data})
   }
 
   async openRepeatModal() {

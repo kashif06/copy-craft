@@ -40,13 +40,17 @@ export class CreateTaskComponent  implements OnInit {
 
   constructor(private modalCtrl: ModalController, private fb: FormBuilder, private modalDataService: ModalDataService) { 
 
-    this.modalDataService.getModalResponse().subscribe((res:any) => {
-      console.log("RESPONSE GOT ", res);
-    })
-
     const date = new Date();
     this.dateTime = this.roundToNextHour(date);
     this.dateTimeISO = this.toLocalISOString(this.dateTime);
+
+    this.modalDataService.getModalResponse().subscribe((res:any) => {
+      if(res.dateTimeChange != undefined) {
+        this.dateTime = res.dateTimeChange.dateTime;
+        this.dateTimeISO = res.dateTimeChange.dateTimeISO;
+      }
+      
+    })
 
   }
 
