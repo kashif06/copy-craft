@@ -17,6 +17,7 @@ export class ModalDataService {
    * A Subject is a special type of Observable that allows both publishing 
    * new values to subscribers and subscribing to those values. We use it 
    * here to act as a central point for sending and receiving data.
+   * ----- (A data channel where components can send and receive data) -----
    */
   private modalResponse = new Subject<any>();
 
@@ -26,6 +27,8 @@ export class ModalDataService {
    * This method takes any type of data (`response`) and publishes it 
    * through the `modalResponse` Subject. Any components subscribed to the 
    * observable will receive this data.
+   * 
+   * ---- (Send data to other components) -----
    * 
    * @param response: The data to be sent to subscribing components.
    */
@@ -37,6 +40,8 @@ export class ModalDataService {
    * This method returns an Observable representation of the `modalResponse` 
    * Subject. Components can subscribe to this observable to receive any 
    * data published through `sendModalResponse`.
+   * 
+   * ---- (Get data from other components) ----
    * 
    * @returns Observable<any>: An observable that emits any data sent through
    * `sendModalResponse`.
