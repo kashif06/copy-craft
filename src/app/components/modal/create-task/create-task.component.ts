@@ -49,6 +49,9 @@ export class CreateTaskComponent  implements OnInit {
         this.dateTime = res.dateTimeChange.dateTime;
         this.dateTimeISO = res.dateTimeChange.dateTimeISO;
       }
+      else if(res.repeatModalChange != undefined) {
+        console.log(res)
+      }
       
     })
 

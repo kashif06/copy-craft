@@ -92,12 +92,12 @@ export class CreateRepeatTaskComponent  implements OnInit {
       endsMode: this.endsMode,
       occurrences: this.occurrences
     };
-    this.modalDataService.sendModalResponse(data)
-    this.modalCtrl.dismiss();
+    this.modalDataService.sendModalResponse({'repeatModalChange': data})
+    this.modalCtrl.dismiss(data, 'confirm');
   }
 
   cancel() {
-    this.modalCtrl.dismiss();
+    this.closeModal();
   }
 
   toggleDay(day: number) {
@@ -110,7 +110,11 @@ export class CreateRepeatTaskComponent  implements OnInit {
   }
 
   back() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss('onRepeatModalClose', 'onRepeatModalClose');
+  }
+
+  closeModal() {
+    this.modalCtrl.dismiss(null, 'onRepeatModalClose');
   }
 
   handleSelectChange(e:any) {

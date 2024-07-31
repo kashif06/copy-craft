@@ -17,17 +17,30 @@ export class CreateTaskDatetimeComponent  implements OnInit {
   @Input() date!: Date;
   @Input() time!: string;
 
-  public dateTime;
-  public dateTimeISO;
-  timeSelect:any;
-
+  dateTime;
+  dateTimeISO;
+  dynamicYearValues: number[] = []
+  
   constructor(private modalCtrl: ModalController, private modalDataService: ModalDataService) { 
     const date = new Date();
     this.dateTime = this.roundToNextHour(date);
     this.dateTimeISO = this.toLocalISOString(this.dateTime);
+    this.generateYearValues(date);
+
+    this.modalDataService.getModalResponse().subscribe((res:any) => {
+      this.dismissModal();
+      console.log("in side dateITme get")
+    })
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  generateYearValues(currentDate:Date) {
+    const currentYear = currentDate.getFullYear();
+    this.dynamicYearValues = Array.from({ length: 5 }, (_, index) => currentYear + index);
+  }
 
   roundToNextHour(date: Date): Date {
     date.setMinutes(0, 0, 0); // Set minutes, seconds, milliseconds to 0
@@ -64,7 +77,6 @@ export class CreateTaskDatetimeComponent  implements OnInit {
   }
 
   onDateTimeChange(newTime: any) {
-    console.log(newTime);
     this.dateTimeISO = newTime;
     this.dateTime = new Date(newTime);
     let data = {
@@ -82,8 +94,15 @@ export class CreateTaskDatetimeComponent  implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
 
+    console.log(data, role)
+
     if (role === 'confirm') {
-      // this.message = `Hello, ${data}!`;
+      // Handle confirmed data from repeat modal
+    } else if (role === 'onRepeatModalClose') {
+      const parentModal = await this.modalCtrl.getTop();
+      if (parentModal) {
+        await parentModal.dismiss();
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <ion-datetime  (ionChange)="onDateTimeChange($event.detail.value)"  [(ngModel)]="dateTimeISO" displayFormat="YYYY-mm-dd" presentation="date">
+  <ion-datetime  (ionChange)="onDateTimeChange($event.detail.value)" [yearValues]="dynamicYearValues" [(ngModel)]="dateTimeISO" displayFormat="YYYY-mm-dd" presentation="date">
   </ion-datetime>
   <div>
     <ion-list>
